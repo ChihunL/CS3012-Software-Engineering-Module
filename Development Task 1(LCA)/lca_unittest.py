@@ -18,6 +18,9 @@ class TestLCA(unittest.TestCase):
         self.assertEqual(1, findLCA(root, 4, 6))
         self.assertEqual(1, findLCA(root, 3, 4))
         self.assertEqual(2, findLCA(root, 2, 4))
+        self.assertNotEqual(7, findLCA(root, 3, 4))
+        self.assertNotEqual(5, findLCA(root, 2, 4))
+
 
 if __name__ == '__main__':
     unittest.main()
