@@ -6,6 +6,10 @@ class TestLCA(unittest.TestCase):
     def setUp(self):
         pass
 
+    def test_empty_graph(self):
+        self.assertEqual(-1, findLCA(root, 4, 5)) 
+        self.assertEqual(-1, findLCA(root, 2, 7))   
+
     def test_find_lca(self):
         root = Node(1)
         root.left = Node(2)
@@ -21,6 +25,7 @@ class TestLCA(unittest.TestCase):
         self.assertNotEqual(7, findLCA(root, 3, 4))
         self.assertNotEqual(5, findLCA(root, 2, 4))
 
+    
 
 if __name__ == '__main__':
     unittest.main()
