@@ -16,6 +16,21 @@ class TestLCA(unittest.TestCase):
         root = Node(1)
         tree = Tree()
         self.assertEqual(1, Tree.findLCA(root, 1, 1))
+    
+    def test_lca_three_nodes(self):
+        root = Node(1)
+        root.left = Node(2)
+        root.right = Node(3)
+        self.assertEqual(1, Tree.findLCA(root, 2, 3))
+
+    def test_lca_child_ancestor(self):
+        root = Node(1)
+        root.left = Node(2)
+        root.left.left = Node(3)
+        self.assertEqual(2, Tree.findLCA(root, 2, 3))
+        self.assertEqual(1, Tree.findLCA(root, 1, 3))
+
+
 
     def test_find_lca(self):
         root = Node(1)
