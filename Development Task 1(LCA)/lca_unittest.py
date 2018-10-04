@@ -8,8 +8,8 @@ class TestLCA(unittest.TestCase):
 
     def test_null_graph(self):
         tree = Tree()
-        self.assertEqual(-1, Tree.findLCA(root, 4, 5)) 
-        self.assertEqual(-1, Tree.findLCA(root, 2, 7))
+        self.assertEqual(-1, tree.find_common(2, 1) 
+        self.assertEqual(-1, tree.find_common(-1, 3))
            
 
     def test_finding_lca_itself(self):
@@ -31,7 +31,6 @@ class TestLCA(unittest.TestCase):
         self.assertEqual(1, Tree.findLCA(root, 1, 3))
 
 
-
     def test_find_lca(self):
         root = Node(1)
         root.left = Node(2)
@@ -48,6 +47,9 @@ class TestLCA(unittest.TestCase):
         self.assertNotEqual(7, Tree.findLCA(root, 3, 4))
         self.assertNotEqual(5, Tree.findLCA(root, 2, 4))
 
+    def test_dag_lca(self):
+        tree = Tree()
+        
     
 
 if __name__ == '__main__':
