@@ -7,6 +7,7 @@ class TestLCA(unittest.TestCase):
         pass
 
     def test_null_graph(self):
+        root = Node(None)
         self.assertEqual(-1, findLCA(root, 4, 5)) 
         self.assertEqual(-1, findLCA(root, 2, 7))   
 
