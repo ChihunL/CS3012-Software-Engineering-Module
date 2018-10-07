@@ -7,10 +7,9 @@ class TestLCA(unittest.TestCase):
         pass
 
     def test_null_graph(self):
-        tree = Tree()
-        self.assertEqual(-1, tree.find_common(2, 1) 
-        self.assertEqual(-1, tree.find_common(-1, 3))
-           
+        root = Node(None)
+        self.assertEqual(-1, findLCA(root, 4, 5)) 
+        self.assertEqual(-1, findLCA(root, 2, 7))   
 
     def test_finding_lca_itself(self):
         root = Node(1)
