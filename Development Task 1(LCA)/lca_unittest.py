@@ -48,6 +48,13 @@ class TestLCA(unittest.TestCase):
 
     def test_dag_lca(self):
         tree = Tree()
+    
+    def test_not_connected(self):
+        root = LCA.Node(1)
+        root.left = LCA.Node(2)
+        root.right = LCA.Node(3)
+        root.left.left = LCA.Node(4)
+        self.assertEqual(-1, LCA.findLCA(root, 2, 9, ))
         
     
 
