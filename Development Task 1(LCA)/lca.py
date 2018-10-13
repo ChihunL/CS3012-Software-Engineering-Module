@@ -14,7 +14,7 @@ class Node:
 # Finds the path from root node to given root of the tree. 
 # Stores the path in a list path[], returns true if path  
 # exists otherwise false 
-def findLCA( root, path, k): 
+def findPath( root, path, k): 
   
     # Baes Case 
     if root is None: 
@@ -41,7 +41,7 @@ def findLCA( root, path, k):
   
 # Returns LCA if node n1 , n2 are present in the given 
 # binary tre otherwise return -1 
-def findLCA_DAG(root, n1, n2): 
+def findLCA(root, n1, n2): 
   
     # To store paths to n1 and n2 fromthe root 
     path1 = [] 
