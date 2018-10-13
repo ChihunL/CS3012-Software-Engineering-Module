@@ -37,22 +37,21 @@ class TestLCA(unittest.TestCase):
         root.left.right = Node(5)
         root.right.left = Node(6)
         root.right.right = Node(7)
-        tree = Tree()
         self.assertEqual(2, findLCA(root, 4, 5))
-        self.assertEqual(1, LCA.findLCA(root, 4, 6))
-        self.assertEqual(1, LCA.findLCA(root, 3, 4))
-        self.assertEqual(2, LCA.findLCA(root, 2, 4))
-        self.assertNotEqual(7, LCA.findLCA(root, 3, 4))
-        self.assertNotEqual(5, LCA.findLCA(root, 2, 4))
+        self.assertEqual(1, findLCA(root, 4, 6))
+        self.assertEqual(1, findLCA(root, 3, 4))
+        self.assertEqual(2, findLCA(root, 2, 4))
+        self.assertNotEqual(7, findLCA(root, 3, 4))
+        self.assertNotEqual(5, findLCA(root, 2, 4))
 
-    def test_dag_lca(self):
+    
     
     def test_not_connected(self):
         root = Node(1)
         root.left = Node(2)
         root.right = Node(3)
-        root.left.left = LCA.Node(4)
-        self.assertEqual(-1, LCA.findLCA(root, 2, 9, ))
+        root.left.left = Node(4)
+        self.assertEqual(-1, findLCA(root, 2, 9, ))
         
     
 

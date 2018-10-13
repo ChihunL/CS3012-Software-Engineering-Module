@@ -14,7 +14,7 @@ class Node:
 # Finds the path from root node to given root of the tree. 
 # Stores the path in a list path[], returns true if path  
 # exists otherwise false 
-def findPath( root, path, k): 
+def findLCA( root, path, k): 
   
     # Baes Case 
     if root is None: 
