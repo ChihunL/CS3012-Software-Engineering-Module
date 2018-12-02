@@ -38,22 +38,26 @@ if __name__ == '__main__':
     g = Github("3944f1ef76fcd722b15e6d35a11e2fa93e01485f")
 
     for repo in g.get_user().get_repos():
-        print repo.name
+      
+       
+        labels = repo.get_labels()
+        with open('repoDetails.csv', 'wb') as csvfile:
+            filewriter = csv.writer(csvfile, delimiter=',',
+                                quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        
+            for repo in g.get_user().get_repos():
 
-    user = g.get_user()
-    print user.login
-    repo = g.get_repo("ChihunL/First-Year-Java-Programming-Assignments")
-    print repo.name
+                    filewriter.writerow([repo.name])
+                    filewriter.writerow([(repo.get_topics())])
+                    filewriter.writerow([repo.stargazers_count])
+            
+        with open('repoNames.csv', 'wb') as csvfile:
+            filewriter1 = csv.writer(csvfile, delimiter=',',
+                                    quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        
+            for label in labels:
+                filewriter1.writerow([label])
 
-    repo = g.get_repo("ChihunL/First-Year-Java-Programming-Assignments")
-    print (repo.get_topics())
-
-    repo = g.get_repo("ChihunL/First-Year-Java-Programming-Assignments")
-    print repo.stargazers_count
-
-    labels = repo.get_labels()
-    for label in labels:
-        print(label)
 
 """    repositories = g.search_repositories(query='language:java')
     for repo in repositories:
@@ -66,10 +70,5 @@ if __name__ == '__main__':
     
 
 
-"""    with open('repoNames.csv', 'wb') as csvfile:
-        filewriter = csv.writer(csvfile, delimiter=',',
-                                quotechar='|', quoting=csv.QUOTE_MINIMAL)
-
-        for repo in g.get_user().get_repos():
-            filewriter.writerow([repo.name])
+"""    
 """

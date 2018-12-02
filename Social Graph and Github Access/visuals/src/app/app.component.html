@@ -1,0 +1,204 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Github API Data Visualisation
+  </h1>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+    /*body {*/
+    /*margin: 0;*/
+    /*}*/
+    .row {
+      display: flex;
+      justify-content: space-between;
+    }
+    .circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 150px;
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+<div class="row">
+  <div id="first" class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+</div>
+<h3>
+  {{me}}
+ </h3>>
+
+
+<script>
+  var numbers = [2, 4, 6, 8, 10];
+  let circles = d3.select(".row")
+    .selectAll(".circle")
+    .data(numbers)
+    .style("height", (data) => {
+      return (data * 50) + "px";
+    })
+    .style("width", (data) => {
+      return (data * 50) + "px";
+    })
+    .style("border-radius", (data) => {
+      return (data * 50) / 2 + "px";
+    })
+    .style("margin-top", (data) => {
+      return (500 - (data * 50)) + "px";
+    })
+  circles.enter()
+    .append("div")
+    .attr("class", "circle")
+    .style("height", (data) => {
+      return (data * 50) + "px";
+    })
+    .style("width", (data) => {
+      return (data * 50) + "px";
+    })
+    .style("border-radius", (data) => {
+      return (data * 50) / 2 + "px";
+    })
+    .style("margin-top", (data) => {
+      return (500 - (data * 50)) + "px";
+    })
+
+
+    var canvas = document.querySelector("canvas"),
+    context = canvas.getContext("2d"),
+    width = canvas.width,
+    height = canvas.height;
+
+var simulation = d3.forceSimulation()
+    .force("link", d3.forceLink().id(function(d) { return d.id; }))
+    .force("charge", d3.forceManyBody())
+    .force("center", d3.forceCenter());
+
+d3.json("miserables.json", function(error, graph) {
+  if (error) throw error;
+
+  simulation
+      .nodes(graph.nodes)
+      .on("tick", ticked);
+
+  simulation.force("link")
+      .links(graph.links);
+
+  function ticked() {
+    context.clearRect(0, 0, width, height);
+    context.save();
+    context.translate(width / 2, height / 2 + 40);
+
+    context.beginPath();
+    graph.links.forEach(drawLink);
+    context.strokeStyle = "#aaa";
+    context.stroke();
+
+    context.beginPath();
+    graph.nodes.forEach(drawNode);
+    context.fill();
+    context.strokeStyle = "#fff";
+    context.stroke();
+
+    context.restore();
+  }
+});
+
+function drawLink(d) {
+  context.moveTo(d.source.x, d.source.y);
+  context.lineTo(d.target.x, d.target.y);
+}
+
+function drawNode(d) {
+  context.moveTo(d.x + 3, d.y);
+  context.arc(d.x, d.y, 3, 0, 2 * Math.PI);
+}
+
+</script>
+<style>
+
+  .bar {
+    fill: steelblue;
+  }
+  
+  .axis text {
+    font: 10px sans-serif;
+  }
+  
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+  
+  .x.axis path {
+    display: none;
+  }
+  
+  </style>
+  <svg class="chart"></svg>
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script>
+  
+  var margin = {top: 20, right: 30, bottom: 30, left: 40},
+      width = 960 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
+  
+  var x = d3.scale.ordinal()
+      .rangeRoundBands([0, width], .1);
+  
+  var y = d3.scale.linear()
+      .range([height, 0]);
+  
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom");
+  
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left");
+  
+  var chart = d3.select(".chart")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  
+  d3.tsv("data.tsv", type, function(error, data) {
+    x.domain(data.map(function(d) { return d.name; }));
+    y.domain([0, d3.max(data, function(d) { return d.value; })]);
+  
+    chart.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+  
+    chart.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+  
+    chart.selectAll(".bar")
+        .data(data)
+      .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d) { return x(d.name); })
+        .attr("y", function(d) { return y(d.value); })
+        .attr("height", function(d) { return height - y(d.value); })
+        .attr("width", x.rangeBand());
+  });
+  
+  function type(d) {
+    d.value = +d.value; // coerce to number
+    return d;
+  }
+</script>  
+</body>
+</html>
+
+<router-outlet></router-outlet>
